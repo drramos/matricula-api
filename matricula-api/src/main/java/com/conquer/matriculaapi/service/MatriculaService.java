@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -55,8 +56,11 @@ public class MatriculaService {
 	
 	public Turma consultarTurma(String codigoTurma) {
 		
-		String urlBase = "http://localhost:8085/turma-api/consultar?codigoTurma=";
-		String url = urlBase+codigoTurma;
+		String urlBase = "http://localhost:8085/turma-api/consultar";
+		HashMap<String, String> parametros = new HashMap<>(); 
+		parametros.put("codigoTurma", codigoTurma);
+		String url = UtilHttp.montarURl(urlBase,parametros);
+		
 		MensagemRetorno mensagemRetorno = new MensagemRetorno();
 		
 		try {
